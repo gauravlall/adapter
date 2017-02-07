@@ -2,6 +2,7 @@ package com.oneops.cms.ws.rest;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -26,6 +27,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
+                .genericModelSubstitutes(ResponseEntity.class)
                 .apiInfo(apiInfo());
     }
 
