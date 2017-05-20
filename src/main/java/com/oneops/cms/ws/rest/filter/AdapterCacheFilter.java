@@ -19,6 +19,7 @@ package com.oneops.cms.ws.rest.filter;
 
 import com.oneops.cms.cm.service.CmsCmManager;
 import com.oneops.cms.md.service.CmsMdManager;
+import com.oneops.cms.md.service.CmsMdProcessor;
 import com.oneops.filter.CacheFilter;
 
 /**
@@ -29,17 +30,27 @@ import com.oneops.filter.CacheFilter;
  */
 public class AdapterCacheFilter extends CacheFilter {
 
-    private CmsMdManager mdManager;
+  private CmsMdManager mdManager;
+  private CmsMdProcessor mdProcessor;
 
-    public AdapterCacheFilter(boolean cacheEnabled, long ttl, long cacheSize, CmsCmManager cmManager, CmsMdManager mdManager) {
-        super(cacheEnabled, ttl, cacheSize, cmManager);
-        this.mdManager = mdManager;
-    }
+  public AdapterCacheFilter(boolean cacheEnabled, long ttl, long cacheSize, CmsCmManager cmManager,
+      CmsMdManager mdManager) {
+    super(cacheEnabled, ttl, cacheSize, cmManager);
+    this.mdManager = mdManager;
+  }
 
-    @Override
-    public void onUpdate(String varName) {
-        mdManager.invalidateCache();
-        logger.info("Adapter metadata cache invalidated.");
-    }
+  @Override
+  public void onUpdate(String varName) {
+    mdManager.invalidateCache();
+    logger.info("Adapter metadata cache invalidated.");
+  }
+
+
+  public void setMdProcessor(CmsMdProcessor mdProcessor) {
+    this.mdProcessor = mdProcessor;
+  }
+
+
+
 
 }

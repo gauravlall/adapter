@@ -93,15 +93,12 @@ public class MdRestController extends AbstractRestController {
 	@ResponseBody
 	public CmsClazz getClassByName(@PathVariable String clazzName,
 			                       @RequestParam(value="includeActions", required = false) Boolean includeActions){
-		
 		CmsClazz clazz;
-		
-		if (includeActions != null && includeActions) { 
+		if (includeActions != null && includeActions) {
 			clazz = mdManager.getClazz(clazzName, includeActions);
 		} else {	
 			clazz = mdManager.getClazz(clazzName);
 		}
-
 		if (clazz == null) {
 			throw new MDException(CmsError.MD_NO_CLASS_WITH_GIVEN_NAME_ERROR,
                                 "there is no class with name " + clazzName);
@@ -115,7 +112,6 @@ public class MdRestController extends AbstractRestController {
     @RequestMapping(method=RequestMethod.POST, value="/md/classes")
     @ResponseBody
     public CmsClazz createClazz(@RequestBody CmsClazz clazz) {
-
         CmsClazz createdClazz = mdManager.createClazz(clazz);
         logger.debug(createdClazz.getClassId());
         return createdClazz;

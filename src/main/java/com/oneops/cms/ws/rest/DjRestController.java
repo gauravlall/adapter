@@ -224,9 +224,7 @@ public class DjRestController extends AbstractRestController {
 		CmsRfcCI rfc = djManager.getRfcCIById(rfcId);
 		if (rfc == null) throw new DJException(CmsError.DJ_NO_RFC_WITH_GIVEN_ID_ERROR,
                                                 "There is no rfc with this id");
-
 		scopeVerifier.verifyScope(scope, rfc);
-	
 		return rfc;
 	}
 	
